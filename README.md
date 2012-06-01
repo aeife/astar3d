@@ -5,6 +5,8 @@ This is an implementation of the a-star algorithm using realistic three-dimensio
 
 For upcoming features and todos also look at issues.
 
+## Demo
+
 ## Features
 * a-star path navigation considering three dimensions
 * 3d graphics using WebGL and Three.js 
