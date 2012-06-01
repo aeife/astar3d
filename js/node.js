@@ -54,10 +54,11 @@ function Node(x,y,z) {
     this.g = 0;
     this.h = 0;
 
+    this.cameFrom = false;
     this.open = false;
     this.closed = false;
 
-    this.wall = false; 
+    this.wall = false;
 }
 
 Node.prototype.toggleWall = function() {
@@ -102,4 +103,5 @@ Node.prototype.clear = function () {
     this.f = 0;
     this.h = 0;
     this.g = 0;
+    this.cameFrom = false;
 };
