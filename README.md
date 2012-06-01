@@ -6,6 +6,7 @@ This is an implementation of the a-star algorithm using realistic three-dimensio
 For upcoming features and todos also look at issues.
 
 ## Demo
+Try it out [here](http://aeife.github.com/astar3d/app/).
 
 ## Features
 * a-star path navigation considering three dimensions
