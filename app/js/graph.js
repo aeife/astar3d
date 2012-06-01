@@ -85,12 +85,16 @@ function Graph(){
 
     Graph.prototype.showPathInfo = function(){
         for (var i=0; i<this.node.length; i++){
-            for (var j=0; j<this.node[i].length; j++) {
-                for (var k=0; k<this.node[i][j].length; k++) {
-                    if (this.node[i][j][k] && this.node[i][j][k].open) {
-                        this.node[i][j][k].changeTo("open");
-                    } else if (this.node[i][j][k] && this.node[i][j][k].closed) {
-                        this.node[i][j][k].changeTo("closed");
+            if (this.node[i]){
+                for (var j=0; j<this.node[i].length; j++) {
+                    if (this.node[i][j]){
+                        for (var k=0; k<this.node[i][j].length; k++) {
+                            if (this.node[i][j][k] && this.node[i][j][k].open) {
+                                this.node[i][j][k].changeTo("open");
+                            } else if (this.node[i][j][k] && this.node[i][j][k].closed) {
+                                this.node[i][j][k].changeTo("closed");
+                            }
+                        }
                     }
                 }
             }
