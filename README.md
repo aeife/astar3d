@@ -6,12 +6,13 @@ This is an implementation of the a-star algorithm using realistic three-dimensio
 For upcoming features and todos also look at issues.
 
 ## Demo
+Try it out [here](http://aeife.github.com/astar3d/app/)!
 
 ## Features
 * a-star path navigation considering three dimensions
 * 3d graphics using WebGL and Three.js 
 * full customizable three-dimensional level build of blocks
-    * free extendable in all dimensions
+    * easy add and remove blocks
     * impassable wall nodes
 * import and export levels (json)
 * generate random levels
