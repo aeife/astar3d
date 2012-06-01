@@ -3,6 +3,8 @@
 ## A three-dimensional a-star algorithm.
 This is an implementation of the a-star algorithm using realistic three-dimensional pathfinding displayed with WebGL.
 
+For upcoming features and todos also look at issues.
+
 ## Features
 * a-star path navigation considering three dimensions
 * 3d graphics using WebGL and Three.js 
@@ -35,8 +37,8 @@ The node class.
 ### graph.js
 The graph object for building the three-dimensional level and structur.
 
-## helpers.js
-Some helpers.
+### helpers.js
+Some helpers like addition array functions.
 
 ### Resources
 todo...
