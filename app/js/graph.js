@@ -20,6 +20,10 @@ function Graph(){
     
     this.savedLevel;
 
+    var lowestIndexX = 0;
+    var lowestIndexY = 0;
+    var lowestIndexZ = 0;
+
     var wallBtn = false;
 
     this.nodeInfo = 1;
@@ -102,11 +106,13 @@ function Graph(){
     };
 
     Graph.prototype.clear = function() {
-        for (var i=0; i<this.node.length; i++){
+        for (var i=lowestIndexX; i<=lowestIndexX+this.node.length; i++){
             if (this.node[i]){
-                for (var j=0; j<this.node[i].length; j++){
+                for (var j=lowestIndexY; j<=lowestIndexY+this.node[i].length; j++){
                     if (this.node[i][j]){
-                        for (var k=0; k<this.node[i][j].length; k++){
+                        console.log(lowestIndexZ);
+                        console.log(lowestIndexZ+this.node[i][j].length);
+                        for (var k=lowestIndexZ; k<=lowestIndexZ+this.node[i][j].length; k++){
                             if (this.node[i][j][k] && !this.node[i][j][k].wall) {
                                 this.node[i][j][k].clear();
                                 this.node[i][j][k].changeTo("normal");
@@ -123,10 +129,15 @@ function Graph(){
 
         //extend field if not existent
         if (!this.node[x]){
+            if (x < lowestIndexX) lowestIndexX = x;
+
             this.node[x] = [];
             this.node[x][y] = [];
         } else if (!this.node[x][y]) {
+            if (y < lowestIndexY) lowestIndexY = y;
             this.node[x][y] = [];
+        } else if (!this.node[x][y][z]) {
+            if (z < lowestIndexZ) lowestIndexZ = z;
         }
 
         this.node[x][y][z] = new Node(x,y,z);
@@ -148,16 +159,18 @@ function Graph(){
 
     Graph.prototype.save = function(){
         var level = [];
-        for (var i=0; i<this.node.length; i++){
+        for (var i=lowestIndexX; i<=lowestIndexX+this.node.length; i++){
             if (this.node[i]){
                 level[i] = [];
-                for (var j=0; j<this.node[i].length; j++){
+                for (var j=lowestIndexY; j<=lowestIndexY+this.node[i].length; j++){
                     if (this.node[i][j]){
                         level[i][j] = [];
-                        for (var k=0; k<this.node[i][j].length; k++){
+                        for (var k=lowestIndexZ; k<=lowestIndexZ+this.node[i][j].length; k++){
                             if (this.node[i][j][k] && this.node[i][j][k].wall) {
+                                console.log("saving x:" + i + " y: " + j + " z:" + k);
                                 level[i][j][k] = {wall: true};
                             } else if (this.node[i][j][k]) {
+                                console.log("saving x:" + i + " y: " + j + " z:" + k);
                                 level[i][j][k] = {wall: false};
                             }
                         }
@@ -165,7 +178,7 @@ function Graph(){
                 }
             }
         }
-
+        console.log(level);
         this.savedLevel = JSON.stringify(level);
         //var test = JSON.parse(this.savedLevel);
         //console.log(test);
@@ -187,14 +200,15 @@ function Graph(){
         //this.init();
 
         var level = JSON.parse(levelJson);
-
+        console.log(level);
         for (var i=0; i<this.nodeMeshes.length; i++){
             scene.remove(this.nodeMeshes[i]);
         }
 
         this.nodeMeshes = [];
-
+        console.log(lowestIndexY);console.log(level.length);
         this.node = [];console.log("test");
+
         for (var i=0; i<level.length; i++){
             if (level[i]){
                 this.node[i] = [];
@@ -203,6 +217,7 @@ function Graph(){
                         this.node[i][j] = [];
                         for (var k=0; k<level[i][j].length; k++){
                             if (level[i][j][k]){
+                                console.log("loading x:" + i + " y: " + j + " z:" + k);
                                 this.addNode(i,j,k,level[i][j][k].wall);
                             }
                         }
