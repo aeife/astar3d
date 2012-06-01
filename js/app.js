@@ -18,11 +18,7 @@ $(function() {
     });
 
     $("#diagonal").change(function() {
-        if ($("#diagonal").attr("checked")) {
-            options.diagonal = true;
-        } else {
-            options.diagonal = false;
-        }
+        options.diagonal = !!$("#diagonal").attr("checked");
     });
 
     $("#pathInfo").change(function() {
