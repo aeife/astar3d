@@ -149,14 +149,18 @@ function Graph(){
     Graph.prototype.save = function(){
         var level = [];
         for (var i=0; i<this.node.length; i++){
-            level[i] = [];
-            for (var j=0; j<this.node[i].length; j++){
-                level[i][j] = [];
-                for (var k=0; k<this.node[i][j].length; k++){
-                    if (this.node[i][j][k] && this.node[i][j][k].wall) {
-                        level[i][j][k] = {wall: true};
-                    } else if (this.node[i][j][k]) {
-                        level[i][j][k] = {wall: false};
+            if (this.node[i]){
+                level[i] = [];
+                for (var j=0; j<this.node[i].length; j++){
+                    if (this.node[i][j]){
+                        level[i][j] = [];
+                        for (var k=0; k<this.node[i][j].length; k++){
+                            if (this.node[i][j][k] && this.node[i][j][k].wall) {
+                                level[i][j][k] = {wall: true};
+                            } else if (this.node[i][j][k]) {
+                                level[i][j][k] = {wall: false};
+                            }
+                        }
                     }
                 }
             }
@@ -190,14 +194,18 @@ function Graph(){
 
         this.nodeMeshes = [];
 
-        this.node = [];
+        this.node = [];console.log("test");
         for (var i=0; i<level.length; i++){
-            this.node[i] = [];
-            for (var j=0; j<level[i].length; j++) {
-                this.node[i][j] = [];
-                for (var k=0; k<level[i][j].length; k++){
-                    if (level[i][j][k]){
-                        this.addNode(i,j,k,level[i][j][k].wall);
+            if (level[i]){
+                this.node[i] = [];
+                for (var j=0; j<level[i].length; j++) {
+                    if (level[i][j]){
+                        this.node[i][j] = [];
+                        for (var k=0; k<level[i][j].length; k++){
+                            if (level[i][j][k]){
+                                this.addNode(i,j,k,level[i][j][k].wall);
+                            }
+                        }
                     }
                 }
             }
