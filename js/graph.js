@@ -99,11 +99,15 @@ function Graph(){
 
     Graph.prototype.clear = function() {
         for (var i=0; i<this.node.length; i++){
-            for (var j=0; j<this.node[i].length; j++){
-                for (var k=0; k<this.node[i][j].length; k++){
-                    if (this.node[i][j][k] && !this.node[i][j][k].wall) {
-                        this.node[i][j][k].clear();
-                        this.node[i][j][k].changeTo("normal");
+            if (this.node[i]){
+                for (var j=0; j<this.node[i].length; j++){
+                    if (this.node[i][j]){
+                        for (var k=0; k<this.node[i][j].length; k++){
+                            if (this.node[i][j][k] && !this.node[i][j][k].wall) {
+                                this.node[i][j][k].clear();
+                                this.node[i][j][k].changeTo("normal");
+                            }
+                        }
                     }
                 }
             }
@@ -113,12 +117,18 @@ function Graph(){
     Graph.prototype.addNode = function(x,y,z,wall){
         if (wall === undefined) wall = false;
 
+        //extend field if not existent
+        if (!this.node[x]){
+            this.node[x] = [];
+            this.node[x][y] = [];
+        } else if (!this.node[x][y]) {
+            this.node[x][y] = [];
+        }
+
         this.node[x][y][z] = new Node(x,y,z);
 
         if (wall)
             this.node[x][y][z].toggleWall();
-
-        
 
         this.nodeMeshes.push(this.node[x][y][z].mesh);
         scene.add(this.node[x][y][z].mesh);
