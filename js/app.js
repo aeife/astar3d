@@ -1,10 +1,3 @@
-/*
-- Animationsmodus
-- Leveländerung während Animation
-- umfangreichere Tests
-- Levelimport/export mittels Datei
-*/
-
 $(function() {
     var levelWidth = 10;
     var levelHeight = 10;
@@ -96,8 +89,6 @@ $(function() {
         graph.load(levelJson);
     });
 
-
-
     $("#container").on("nodeInfo",function() {
             $("#nodeInfo").html("Node[" + graph.nodeInfo.x + "][" + graph.nodeInfo.y + "][" + graph.nodeInfo.z + "]" + " <br/>" +
                                 "f-Score:" + graph.nodeInfo.f.toFixed(2) + "<br/>" +
@@ -121,8 +112,6 @@ $(function() {
     }
 
     function analysis(result) {
-        
-
         if (showPathInfo)
             graph.showPathInfo(result.path);
         
