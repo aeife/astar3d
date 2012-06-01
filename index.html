@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <title>A*-Algorithm</title>
+        <link rel="stylesheet" type="text/css" media="screen, projection" href="css/style.css" />
+
+        <script type='text/javascript' src='js/lib/jquery-1.7.1.min.js'></script>
+        <script type='text/javascript' src='js/lib/Three.js'></script>
+        <script type='text/javascript' src='js/helpers.js'></script>
+        <script type='text/javascript' src='js/node.js'></script>
+        <script type='text/javascript' src='js/graph.js'></script>
+        <script type='text/javascript' src='js/astar.js'></script>
+        <script type='text/javascript' src='js/app.js'></script>
+    </head>
+<body>
+
+    <div id="control">
+        CONTROLS
+        </br>
+        <input type="text" class="small" id="levelWidth" value="10"/> x <input type="text" class="small" id="levelHeight" value="10"/>
+        <br/>
+        <input type="button" id="generateLevel" value="generate level" /> <br/>
+        <select id="wallPercentage">
+                <option value="0.05">5</option>
+                <option value="0.1">10</option>
+                <option value="0.15">15</option>
+                <option value="0.2">20</option>
+                <option value="0.25">25</option>
+                <option value="0.3">30</option>
+        </select>
+        <input type="button" id="generateLevelRandom" value="generate random" /> <br/>
+        <select id="heuristic" name="heuristic">
+            <option value="euclidean">euclidean</option>
+            <option value="manhatten">manhatten</option>
+         </select> <br/>
+
+        <select id="heightFactor">
+                <!--<option value="0">0</option>-->
+                <option value=".5">hight factor 1</option>
+                <option value="1">hight factor 2</option>
+                <option value="2">hight factor 3</option>
+                <option value="3">hight factor 4</option>
+                <option value="4">hight factor 5</option>
+                <option value="5">hight factor 6</option>
+        </select> <br/>
+
+        <input type="button" id="runTests" value="run tests" />
+        <br/>
+        <input type="button" id="editBtn" value="edit" />
+        <br/>
+        <input type="button" id="clearBtn" value="Clear" />
+        <br/>
+        diagonal:  
+        <input type="checkbox" id="diagonal" value="Diagonal">
+        <br/>
+        path info: 
+        <input type="checkbox" id="pathInfo" value="pathInfo">
+        <br/>
+        <input type="button" id="saveBtn" value="Save" /> <br/>
+        <input type="text" class="small" id="loadField" value="" />
+        <input type="button" id="loadBtn" value="Load" />
+        <br/><br/>
+        <input type="button" id="processBtn" value="Process" />
+    </div>
+    <div id="messages"></div>
+    <!--<div id="container">test</div>-->
+    <div id="info">
+        INFO
+        <br/>
+        <span id="time"></span>
+        <span id="pathLength"></span>
+        <span id="traversedNodes"></span>
+        <span id="nodeInfo">&nbsp</span>
+        <br/>
+        LEGEND <br/>
+        start node:
+        <img src="img/start.png"/><br/>
+        end node:
+        <img src="img/end.png"/><br/>
+        path node:
+        <img src="img/path.png"/><br/>
+        wall:
+        <img src="img/wall.png"/><br/>
+        opened node:
+        <img src="img/open.png"/><br/>
+        closed node:
+        <img src="img/closed.png"/><br/>
+    </div>
+
+</body>
+</html>
