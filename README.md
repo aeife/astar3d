@@ -35,7 +35,7 @@ Try it out [here](http://aeife.github.com/astar3d/app/)!
 The actual algorithm.
 
 ### node.j
-The node class.
+The node class including properties and the cube mesh.
 
 ### graph.js
 The graph object for building the three-dimensional level and structur.

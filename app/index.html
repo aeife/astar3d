@@ -31,6 +31,7 @@
                 <option value="0.3">30</option>
         </select>
         <input type="button" id="generateLevelRandom" value="generate random" /> <br/>
+        <input type="button" id="generateLevelFullRandom" value="generate full random" /> <br/>
         <select id="heuristic" name="heuristic">
             <option value="euclidean">euclidean</option>
             <option value="manhatten">manhatten</option>
@@ -46,8 +47,6 @@
                 <option value="5">hight factor 6</option>
         </select> <br/>
 
-        <input type="button" id="runTests" value="run tests" />
-        <br/>
         <input type="button" id="editBtn" value="edit" />
         <br/>
         <input type="button" id="clearBtn" value="Clear" />
@@ -64,9 +63,17 @@
         <a href="levels/exampleLevel.txt" target="_blank">example</a>
         <br/><br/>
         <input type="button" id="processBtn" value="Process" />
+        <br/>
+        <br/>
+        from <input type="text" class="small" id="testStartDimension" value="10" /> to <input type="text" class="small" id="testEndDimension" value="15" /><br/>
+        <input type="button" id="runTests" value="run tests" />
+        <br/>
+        <input type="button" id="runRandomTests" value="run random tests" />
+        <br/>
+        <input type="button" id="runFullRandomTests" value="run full random tests" />
     </div>
     <div id="messages"></div>
-    <!--<div id="container">test</div>-->
+    <!--<div id="container"></div>-->
     <div id="info">
         INFO
         <br/>
@@ -89,6 +96,5 @@
         closed node:
         <img src="img/closed.png"/><br/>
     </div>
-
 </body>
 </html>
