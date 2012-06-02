@@ -42,6 +42,12 @@ $(function() {
     });
 
     $("#runTests").click(function() {
+        graphOptions.random = false;
+        runTests();
+    });
+
+    $("#runRandomTests").click(function() {
+        graphOptions.random = true;
         runTests();
     });
 
@@ -130,25 +136,31 @@ $(function() {
     }
 
     function runTests() {
-        var warmup = 5;
+        var warmup = 10;
         var startDimension = 10;
         var endDimension = 12;
-        var repetitions = 10;
+        var repetitions = 50;
         var result;
         var timeAverage;
         var test = $("#test");
+
+        var testResults = "";
 
         for (var i=startDimension; i<endDimension; i++) {
             levelWidth = i;
             levelHeight = i;
             console.log(i + "x" + i + " Level:");
 
-            init();
-            graph.startNode = graph.node[0][0][0];
-            graph.endNode = graph.node[i-1][i-1][0];
+            //generate level and test if path exists
+            do {
+                graph.generateLevel(levelWidth, levelHeight, graphOptions);
+                graph.startNode = graph.node[0][0][0];
+                graph.endNode = graph.node[i-1][i-1][0];
+                result = pathfinding();
+            } while (result.path.length === 0);
 
             timeAverage = 0;
-            for (j=0; j<repetitions+warmup; j++) {
+            for (var j=0; j<repetitions+warmup; j++) {
                 graph.clear();
                 result = pathfinding();
 
@@ -160,6 +172,9 @@ $(function() {
             console.log("traversed elements: " + result.traversedNodes);
             console.log("average time: " + timeAverage);
             //test.append(result.traversedNodes + "    " + timeAverage + "\n");
+            testResults += result.traversedNodes + "    " + timeAverage + "\r\n";
+
         }
+        console.log(testResults);
     }
 });
