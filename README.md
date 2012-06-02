@@ -22,7 +22,7 @@ Try it out [here](http://aeife.github.com/astar3d/app/)!
     * no flying paths
     * no paths through ground
 * fast algorithm runtime 
-    * 12.000 traversed nodes in 22ms
+    * e.g. 12.000 traversed nodes in 30ms
 * integrated runtime tests
 
 ## Dependencies
