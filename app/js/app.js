@@ -158,7 +158,7 @@ $(function() {
     }
 
     function runTests() {
-        var warmup = 10;
+        var warmup = 20;
         var startDimension = testStartDimension;
         var endDimension = testEndDimension;
         var repetitions = 50;
@@ -166,15 +166,18 @@ $(function() {
         var timeAverage;
         var test = $("#test");
 
+        var testEvery = 4;
         var testResults = "";
 
-        for (var i=startDimension; i<=endDimension; i++) {
+        for (var i=startDimension; i<=endDimension; i+=testEvery) {
             levelWidth = i;
             levelHeight = i;
             console.log(i + "x" + i + " Level:");
 
             //generate level and test if path exists
             do {
+                console.log("generating level...");
+                graph.clear();
                 graph.generateLevel(levelWidth, levelHeight, graphOptions);
                 graph.startNode = graph.node[0][0][graph.startCornerHeight];
                 graph.endNode = graph.node[i-1][i-1][graph.endCornerHeight];
@@ -183,6 +186,7 @@ $(function() {
 
             timeAverage = 0;
             for (var j=0; j<repetitions+warmup; j++) {
+                //console.log("repetition " + j);
                 graph.clear();
                 result = pathfinding();
 
@@ -194,7 +198,7 @@ $(function() {
             console.log("traversed elements: " + result.traversedNodes);
             console.log("average time: " + timeAverage);
             //test.append(result.traversedNodes + "    " + timeAverage + "\n");
-            testResults += result.traversedNodes + "    " + timeAverage + "\r\n";
+            testResults += result.traversedNodes + "\t" + timeAverage + "\r\n";
 
         }
         console.log("TESTRESULTS:\n" + testResults);
