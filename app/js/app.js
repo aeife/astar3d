@@ -6,7 +6,9 @@ $(function() {
     var options = {diagonal: false, heuristic: "euclidean", animate: "true", heightFactor: 0.5};
     var showPathInfo = false;
     var levelJson;
-    var graphOptions = {random:false, wallPercentage: 0.05};
+    var graphOptions = {random: false, fullRandom: false, wallPercentage: 0.05};
+    var testStartDimension = 10;
+    var testEndDimension = 15;
 
     init();
 
@@ -41,6 +43,14 @@ $(function() {
         graphOptions.wallPercentage = $(this).val();
     });
 
+    $("#testStartDimension").change(function() {
+        testStartDimension = $("#testStartDimension").val();
+    });
+
+    $("#testEndDimension").change(function() {
+        testEndDimension = $("#testEndDimension").val();
+    });
+
     $("#runTests").click(function() {
         graphOptions.random = false;
         runTests();
@@ -51,6 +61,12 @@ $(function() {
         runTests();
     });
 
+     $("#runFullRandomTests").click(function() {
+        graphOptions.random = false;
+        graphOptions.fullRandom = true;
+        runTests();
+    });
+
     $("#generateLevel").click(function() {
         graphOptions.random = false;
         graph.generateLevel(levelWidth, levelHeight, graphOptions);
@@ -58,6 +74,12 @@ $(function() {
 
     $("#generateLevelRandom").click(function() {
         graphOptions.random = true;
+        graph.generateLevel(levelWidth, levelHeight, graphOptions);
+    });
+
+    $("#generateLevelFullRandom").click(function() {
+        graphOptions.random = false;
+        graphOptions.fullRandom = true;
         graph.generateLevel(levelWidth, levelHeight, graphOptions);
     });
     
@@ -137,8 +159,8 @@ $(function() {
 
     function runTests() {
         var warmup = 10;
-        var startDimension = 10;
-        var endDimension = 12;
+        var startDimension = testStartDimension;
+        var endDimension = testEndDimension;
         var repetitions = 50;
         var result;
         var timeAverage;
@@ -146,7 +168,7 @@ $(function() {
 
         var testResults = "";
 
-        for (var i=startDimension; i<endDimension; i++) {
+        for (var i=startDimension; i<=endDimension; i++) {
             levelWidth = i;
             levelHeight = i;
             console.log(i + "x" + i + " Level:");
@@ -154,8 +176,8 @@ $(function() {
             //generate level and test if path exists
             do {
                 graph.generateLevel(levelWidth, levelHeight, graphOptions);
-                graph.startNode = graph.node[0][0][0];
-                graph.endNode = graph.node[i-1][i-1][0];
+                graph.startNode = graph.node[0][0][graph.startCornerHeight];
+                graph.endNode = graph.node[i-1][i-1][graph.endCornerHeight];
                 result = pathfinding();
             } while (result.path.length === 0);
 
@@ -175,6 +197,6 @@ $(function() {
             testResults += result.traversedNodes + "    " + timeAverage + "\r\n";
 
         }
-        console.log(testResults);
+        console.log("TESTRESULTS:\n" + testResults);
     }
 });

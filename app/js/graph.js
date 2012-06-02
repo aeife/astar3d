@@ -24,6 +24,9 @@ function Graph(){
 
     this.nodeInfo = 1;
 
+    this.startCornerHeight = 0;
+    this.endCornerHeight = 0;
+
     Graph.prototype.init = function() {
 
         container = document.createElement( 'div' );
@@ -63,6 +66,10 @@ function Graph(){
         this.deleteMeshes();
         this.nodeMeshes = [];
         this.node = [];
+        var height;
+        var oldHeight = 0;
+        this.startCornerHeight = 0;
+        this.endCornerHeight = 0;
 
         for (var i=0; i<x; i++){
             this.node[i]= [];
@@ -70,6 +77,23 @@ function Graph(){
                 this.node[i][j] = [];
                 if (options.random){
                     this.addNode(i,j,0,!Math.floor(Math.random()*(1/options.wallPercentage)));
+                } else if (options.fullRandom) {
+                    if (j%5 === 0) {
+                        if (oldHeight < 1){
+                            height = oldHeight + (Math.floor(Math.random()*2));
+                        } else if (oldHeight > 3) {
+                            height = oldHeight - (Math.floor(Math.random()*2));
+                        } else {
+                            height = oldHeight + (Math.floor(Math.random()*3) - 1);
+                        }
+                        oldHeight = height;
+                    }
+                    if (i == 0 && j == 0)
+                        this.startCornerHeight = height;
+                    else if (i == x-1 && j == y-1)
+                        this.endCornerHeight = height;
+
+                    this.addNode(i,j,height,!Math.floor(Math.random()*(1/options.wallPercentage)));
                 } else {
                     this.addNode(i,j,0);
                 }
