@@ -67,6 +67,21 @@ $(function() {
         runTests();
     });
 
+    $("#runSpecifiedTests").click(function() {
+        graphOptions.random = false;
+        runSpecifiedTests();
+    });
+
+     $("#specifyTest").click(function() {
+        if (graph.rightClickMode == "specifyTest") {
+            graph.rightClickMode = "normal";
+            $("#messages").html("");
+        } else {
+            graph.rightClickMode = "specifyTest";
+            $("#messages").html("SPECIFY TEST NODES");
+        }
+    });
+
     $("#generateLevel").click(function() {
         graphOptions.random = false;
         graph.generateLevel(levelWidth, levelHeight, graphOptions);
@@ -155,6 +170,55 @@ $(function() {
         //graph.printGraph();
         graphOptions.random = false;
         astar = new AStar();
+    }
+
+
+    function runSpecifiedTests(){
+        var warmup = 20;
+        var repetitions = 50;
+        var result;
+        var timeAverage;
+        var test = $("#test");
+
+        var testResults = "";
+
+        console.log("running specified test...");
+
+        for (var i=0; i<graph.testEndNodes.length; i++) {
+            levelWidth = i;
+            levelHeight = i;
+            console.log("path to: " + graph.testEndNodes[i].x + " "
+                                    + graph.testEndNodes[i].y + " "
+                                    + graph.testEndNodes[i].z + " ");
+
+            //generate level and test if path exists
+            console.log("testing level...");
+            graph.clear();
+            graph.startNode = graph.startNode;
+            graph.endNode = graph.testEndNodes[i];
+            result = pathfinding();
+
+            if (result.path.length != 0){
+                timeAverage = 0;
+                for (var j=0; j<repetitions+warmup; j++) {
+                    //console.log("repetition " + j);
+                    graph.clear();
+                    result = pathfinding();
+
+                    if (j > warmup-1) {
+                        timeAverage += result.time;
+                    }
+                }
+                timeAverage = timeAverage/repetitions;
+                console.log("traversed elements: " + result.traversedNodes);
+                console.log("average time: " + timeAverage);
+                //test.append(result.traversedNodes + "    " + timeAverage + "\n");
+                testResults += result.traversedNodes + "\t" + timeAverage + "\r\n";
+            } else {
+                console.log("skipping node, not accessable")
+            }
+        }
+        console.log("TESTRESULTS:\n" + testResults);
     }
 
     function runTests() {

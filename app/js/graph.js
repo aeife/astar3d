@@ -14,6 +14,7 @@ function Graph(){
     var closedColor = 0xCCCCC0;
 
     this.leftClickMode = "normal";
+    this.rightClickMode = "normal";
 
     this.startNode;
     this.endNode;
@@ -26,6 +27,8 @@ function Graph(){
 
     this.startCornerHeight = 0;
     this.endCornerHeight = 0;
+
+    this.testEndNodes = [];
 
     Graph.prototype.init = function() {
 
@@ -287,8 +290,13 @@ function Graph(){
             } else if (event.which == 3){
                 switch (that.leftClickMode){
                     case "normal":
-                        hitNode.changeTo("end");
-                        that.endNode = hitNode;
+                        if (that.rightClickMode == "specifyTest"){
+                            hitNode.changeTo("end");
+                            that.testEndNodes.push(hitNode);
+                        } else {
+                            hitNode.changeTo("end");
+                            that.endNode = hitNode;
+                        }
                         break;
                     case "edit":
                         that.deleteNode(hitNode.x, hitNode.y, hitNode.z);
