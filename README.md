@@ -28,7 +28,8 @@ Try it out [here](http://aeife.github.com/astar3d/app/)!
 * fast algorithm runtime 
     * e.g. 12.000 traversed nodes in 30ms
 * integrated runtime tests
-    * random and specific tests
+    * random tests
+    * specific user defined tests
 
 ## Dependencies
 * jQuery 1.7.1
