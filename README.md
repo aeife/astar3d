@@ -36,86 +36,86 @@ Try it out [here](http://aeife.github.com/astar3d/app/)!
 * Three.js
 
 ## HowTo
-During development all control elements are just prototypes, thats why the GUI may not be self explanatory. All GUI related stuff will be made more intuitiv during the project.
-
-Here are some instructions how to use the current controls:
+Current controls (will change probably).
 
 ### generating levels
+* level width and height definable
 
 #### generate level
-Generates a flat level with the defined dimensions.
+* generates flat level
 
 #### generate random level
-Generates a flat level with the defined dimensions and random set walls. The drop down menu defines the wall frequency of the generated level in percent.
+* generates flat level with random walls (adjustable wall frequency)
 
 #### generate full random level
-Generates a level with random set walls and random heights. At the moment heights are between 0 and 3, so the generated level will be mostly walkable.
+* generates level with random walls and random heights
 
 ### edit
-The button "edit" starts the edit mode. All following action can only be done in edit mode.
-
-#### add nodes
-Users can set new nodes with a left click. Nodes can be added to any face of an existing node.
-
-#### delete nodes
-To delete a node just right click on it. All nodes can be deleted.
-
-#### adding walls
-An existing node can be set as a wall by left clicking on it while holding the ctrl-key. Wall nodes are impassable nodes.
+* starts edit mode
+* add node: left click on any node face
+* delete node: right click
+* wall: ctrl + left click
 
 ### pathfinding
 
 #### define start and end nodes
-The a-star algorithm needs a start and an end node for pathfinding. To define a start node, just left click on one node. The node will be marked as red.
-An end node can be defined by right clicking on a node. End nodes are marked as blue.
+* left click: define start node
+* rigt click: define end node
 
 #### defining the heuristic
-Astar uses a heuristic distances between nodes. With the drop down menu users can choose between different heuristics. The standard heuristic is the euclidean distance.
+* euclidean
+* manhatten
 
 #### height factor
-The height factor defines how much the algorithm will avoid heights. A high height factor means the algorithm will avoid most heights and climbing if possible. The resulting path will still be the shortest path, considering the height factor.
-A low height factor means the algorithm will not or only a little avoid heights. With the lowest height factor all dimensions will be handled equally by the algorithm. 
-
-#### diagonal movement
-This enables diagonal movement.
+* defines how much heights are avoided
 
 #### show path info
-When this checkbox is checked the status of all nodes will be marked after the node algorithm processed. This status can be "open" and "closed". For more information about the markers look in the legend.
+* show status of nodes at the end of the algorithm
 
 #### starting the algorithm
-To start the algorithm a start and end node need to be defined. After that the "process" button can be pressed. The algorithm will find a path and mark all path nodes green.
+* start/end nodes need to be defined
+* starting algorithm: process
 
 #### view node properties
-After the algorithm has found a path you can view the properties of a specific node with a middle mousebutton click on a node. 
+* middle mouse button on node (after algorithm execution)
 
 #### clear
-The "clear" button clears all markers like path nodes or start/end nodes in the level. It also will clear properties of nodes.
+* clears all temporary markers and properties
 
 ### testing
-The application includes several build in tests which test the time (in ms) needed for a specific amount of traversed nodes. All results of the tests will be printed to the console.
+* tests traversed nodes in relation to needed time (in ms)
+* all result are printed to console
+* for each dimension and test run:
+    * 50 repetions
+    * excluding 20 warmups
 
 #### simple test
-The simple test will test pathfinding on a flat level without heights. The tested dimensions can be defined by the input fields.
-For each dimension the test automatically navigates from the 0,0,0-node to the node in the oposite corner of the level. Each run has 50 repetitions and 20 additional warmups in before.
+* generates level
+* pathfinding to oposite corners
+    * for specified dimensions
 
 #### random test
-The random test works like the simple test with the addition that it uses random generated levels. So the test for each dimension will include walls with the defined wall frequency. If there is no path for a generated level the test will regenerate it until a path is possible.
+* like simple test using random level
 
 #### full random test
-Like the random test the full random test is an addition. It uses the full random generation for the tested levels. So it will test levels with random walls and random heights. It also will regenerate a level if there is no path.
+* like simple test using full random level
 
 #### specific test
-This test can be specified by the user and uses the current imported or edited level. 
-With the "specify test" button the specific test mode can be entered. In this mode the user can define a start node and multiple(!) end nodes.
-The "run specified test" button starts the test. This will start test runs searching paths from the start node to each defined end node. Each test run still has 50 repetitions and 20 additional warmups. If a defined end node is not reachable it will be skipped.
+* uses current level
+* specify test ->
+    * define start node
+    * define multiple end nodes
+* run specified test ->
+    * test runs from start node to each end node
 
 ### exporting and importing levels
 
 #### save
-To save a level click on the "save" button. This will save the current level with defined heights and walls and opens a new windows with the resulting json.
+* saves current level as json
 
 #### load
-A saved level can be loaded by just copying the json into the input field.
+* loads level from file (json format) and displays it in the scene
+* overrides current level
 
 ## Main components
 
