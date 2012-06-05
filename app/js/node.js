@@ -57,6 +57,7 @@ function Node(x,y,z) {
     this.cameFrom = false;
     this.open = false;
     this.closed = false;
+    this.path = false;
 
     this.wall = false;
 }
@@ -100,6 +101,7 @@ Node.prototype.changeTo = function(newStatus) {
 Node.prototype.clear = function () {
     this.open = false;
     this.closed = false;
+    this.path = false;
     this.f = 0;
     this.h = 0;
     this.g = 0;

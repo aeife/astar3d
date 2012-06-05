@@ -26,9 +26,11 @@ AStar.prototype.process = function(node, startNode, endNode, options) {
 
             while(aNode.cameFrom) {
                 path.push(aNode);
+                aNode.path = true;
                 aNode = aNode.cameFrom;
             }
             path.push(startNode);
+            startNode.path = true;
 
             return {path: path,traversedNodes: traversedNodes};
         }

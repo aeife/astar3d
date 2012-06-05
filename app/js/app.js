@@ -26,8 +26,10 @@ $(function() {
     $("#pathInfo").change(function() {
         if ($("#pathInfo").attr("checked")) {
             showPathInfo = true;
+            graph.showPathInfo();
         } else {
             showPathInfo = false;
+            graph.clearPathInfo();
         }
     });
 

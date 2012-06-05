@@ -114,10 +114,22 @@ function Graph(){
         for (var i=0; i<this.node.length; i++){
             for (var j=0; j<this.node[i].length; j++) {
                 for (var k=0; k<this.node[i][j].length; k++) {
-                    if (this.node[i][j][k] && this.node[i][j][k].open) {
+                    if (this.node[i][j][k] && this.node[i][j][k].open && !this.node[i][j][k].path) {
                         this.node[i][j][k].changeTo("open");
-                    } else if (this.node[i][j][k] && this.node[i][j][k].closed) {
+                    } else if (this.node[i][j][k] && this.node[i][j][k].closed && !this.node[i][j][k].path) {
                         this.node[i][j][k].changeTo("closed");
+                    }
+                }
+            }
+        }
+    };
+
+    Graph.prototype.clearPathInfo = function(){
+        for (var i=0; i<this.node.length; i++){
+            for (var j=0; j<this.node[i].length; j++) {
+                for (var k=0; k<this.node[i][j].length; k++) {
+                    if (this.node[i][j][k] && !this.node[i][j][k].path && !this.node[i][j][k].wall) {
+                        this.node[i][j][k].changeTo("normal");
                     }
                 }
             }
