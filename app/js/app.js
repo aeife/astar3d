@@ -279,6 +279,7 @@ $(function() {
                 }
             }
             timeAverage = timeAverage/repetitions;
+            console.log("path length: " + result.path.length);
             console.log("traversed elements: " + result.traversedNodes);
             console.log("average time: " + timeAverage);
             //test.append(result.traversedNodes + "    " + timeAverage + "\n");

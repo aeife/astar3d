@@ -83,7 +83,7 @@ function Graph(){
                 if (options.random){
                     this.addNode(i,j,0,!Math.floor(Math.random()*(1/options.wallPercentage)));
                 } else if (options.fullRandom) {
-                    if (j%Math.floor(x/3) === 0) {
+                    //if (j%Math.floor(x/3) === 0) {
                         if (oldHeight < 1){
                             height = oldHeight + (Math.floor(Math.random()*2));
                         } else if (oldHeight > 3) {
@@ -92,7 +92,7 @@ function Graph(){
                             height = oldHeight + (Math.floor(Math.random()*3) - 1);
                         }
                         oldHeight = height;
-                    }
+                    //}
                     if (i == 0 && j == 0)
                         this.leftLowerCornerHeight = height;
                     else if (i == x-1 && j == y-1)
