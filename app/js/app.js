@@ -55,6 +55,7 @@ $(function() {
 
     $("#runTests").click(function() {
         graphOptions.random = false;
+        graphOptions.fullRandom = false;
         runTests();
     });
 
@@ -275,7 +276,7 @@ $(function() {
             console.log("traversed elements: " + result.traversedNodes);
             console.log("average time: " + timeAverage);
             //test.append(result.traversedNodes + "    " + timeAverage + "\n");
-            testResults += result.traversedNodes + "\t" + timeAverage + "\r\n";
+            testResults += result.path.length + "\t" + result.traversedNodes + "\t" + timeAverage + "\r\n";
 
         }
         console.log("TESTRESULTS:\n" + testResults);
