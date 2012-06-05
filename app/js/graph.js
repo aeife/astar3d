@@ -38,7 +38,7 @@ function Graph(){
         $(container).attr('id', 'container');
         document.body.appendChild( container );
 
-        camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 2500);
+        camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 20000);
         camera.position.set(window.innerWidth/2, window.innerWidth/2, 1000);
         //camera.lookAt(new THREE.Vector3(window.innerWidth/2,window.innerWidth/2,0));
 

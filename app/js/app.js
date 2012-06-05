@@ -6,7 +6,7 @@ $(function() {
     var options = {diagonal: false, heuristic: "euclidean", animate: "true", heightFactor: 0.5};
     var showPathInfo = false;
     var levelJson;
-    var graphOptions = {random: false, fullRandom: false, wallPercentage: 0.05};
+    var graphOptions = {random: false, fullRandom: false, wallPercentage: 0};
     var testStartDimension = 10;
     var testEndDimension = 15;
 
@@ -224,10 +224,11 @@ $(function() {
                     }
                 }
                 timeAverage = timeAverage/repetitions;
+                console.log("path length: " + result.path.length);
                 console.log("traversed elements: " + result.traversedNodes);
                 console.log("average time: " + timeAverage);
                 //test.append(result.traversedNodes + "    " + timeAverage + "\n");
-                testResults += result.traversedNodes + "\t" + timeAverage + "\r\n";
+                testResults += result.path.length + "\t" + result.traversedNodes + "\t" + timeAverage + "\r\n";
             } else {
                 console.log("skipping node, not accessable")
             }
@@ -244,7 +245,7 @@ $(function() {
         var timeAverage;
         var test = $("#test");
 
-        var testEvery = 4;
+        var testEvery = 5;
         var testResults = "";
 
         for (var i=startDimension; i<=endDimension; i+=testEvery) {
