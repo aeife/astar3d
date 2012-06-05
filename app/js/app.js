@@ -120,8 +120,19 @@ $(function() {
         graph.save();
     });
 
-    $("#loadField").change(function() {
-        levelJson = $(this).val();
+    $("#loadFile").change(function(evt){
+        var f = evt.target.files[0]; 
+
+        if (f) {
+            var r = new FileReader();
+            r.onload = function(e) { 
+                console.log("LOAD");
+                levelJson = e.target.result;
+            }
+        r.readAsText(f);
+        } else { 
+            alert("Failed to load file");
+        }
     });
 
     $("#loadBtn").click(function() {
