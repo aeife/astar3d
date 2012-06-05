@@ -25,8 +25,10 @@ function Graph(){
 
     this.nodeInfo = 1;
 
-    this.startCornerHeight = 0;
-    this.endCornerHeight = 0;
+    this.rightLowerCornerHeight = 0;
+    this.rightUpperCornerHeight = 0;
+    this.leftLowerCornerHeight = 0;
+    this.leftUpperCornerHeight = 0;
 
     this.testEndNodes = [];
 
@@ -92,9 +94,13 @@ function Graph(){
                         oldHeight = height;
                     }
                     if (i == 0 && j == 0)
-                        this.startCornerHeight = height;
+                        this.leftLowerCornerHeight = height;
                     else if (i == x-1 && j == y-1)
-                        this.endCornerHeight = height;
+                        this.rightUpperCornerHeight = height;
+                    else if (i == x-1 && j == 0)
+                        this.leftUpperCornerHeight = height;
+                    else if (i == 0 && j == y-1)
+                        this.rightLowerCornerHeight = height;
 
                     this.addNode(i,j,height,!Math.floor(Math.random()*(1/options.wallPercentage)));
                 } else {

@@ -257,9 +257,15 @@ $(function() {
                 console.log("generating level...");
                 graph.clear();
                 graph.generateLevel(levelWidth, levelHeight, graphOptions);
-                graph.startNode = graph.node[0][0][graph.startCornerHeight];
-                graph.endNode = graph.node[i-1][i-1][graph.endCornerHeight];
+                graph.startNode = graph.node[0][0][graph.leftLowerCornerHeight];
+                graph.endNode = graph.node[i-1][i-1][graph.rightUpperCornerHeight];
                 result = pathfinding();
+
+                if (result.path.length === 0) {
+                    graph.startNode = graph.node[i-1][0][graph.leftUpperCornerHeight];
+                    graph.endNode = graph.node[0][i-1][graph.rightLowerCornerHeight];
+                    result = pathfinding(); 
+                }
             } while (result.path.length === 0);
 
             timeAverage = 0;
