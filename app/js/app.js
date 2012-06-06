@@ -64,10 +64,14 @@ $(function() {
         runTests();
     });
 
-     $("#runFullRandomTests").click(function() {
+    $("#runFullRandomTests").click(function() {
         graphOptions.random = false;
         graphOptions.fullRandom = true;
         runTests();
+    });
+
+    $("#runTestsOnCurrentLevel").click(function() {
+        runTestsOnCurrentLevel();
     });
 
     $("#runSpecifiedTests").click(function() {
@@ -231,6 +235,56 @@ $(function() {
                 testResults += result.path.length + "\t" + result.traversedNodes + "\t" + timeAverage + "\r\n";
             } else {
                 console.log("skipping node, not accessable")
+            }
+        }
+        console.log("TESTRESULTS:\n" + testResults);
+    }
+
+    function runTestsOnCurrentLevel() {
+        var warmup = 20;
+        var startDimension = testStartDimension;
+        var endDimension = testEndDimension;
+        var repetitions = 50;
+        var result;
+        var timeAverage;
+        var test = $("#test");
+
+        var testEvery = 5;
+        var testResults = "";
+
+        graph.startNode = graph.node[0][0][graph.leftLowerCornerHeight];
+
+        for (var i=0; i<levelWidth; i+=testEvery) {
+            //get height
+            for (var h = 15; h>=0; h--){
+                if (graph.node[i][i][h]) {
+                    graph.endNode = graph.node[i][i][h];
+                    break;
+                }
+            }
+            console.log(graph.endNode);
+            graph.clear();
+            result = pathfinding();
+            console.log(result.path);
+            if (result.path.length !== 0){
+                console.log("testing node[" + i + "][" + i + "][" + graph.endNode.z + "]");
+
+                timeAverage = 0;
+                for (var j=0; j<repetitions+warmup; j++) {
+                    //console.log("repetition " + j);
+                    graph.clear();
+                    result = pathfinding();
+
+                    if (j > warmup-1) {
+                        timeAverage += result.time;
+                    }
+                }
+                timeAverage = timeAverage/repetitions;
+                console.log("path length: " + result.path.length);
+                console.log("traversed elements: " + result.traversedNodes);
+                console.log("average time: " + timeAverage);
+                //test.append(result.traversedNodes + "    " + timeAverage + "\n");
+                testResults += result.path.length + "\t" + result.traversedNodes + "\t" + timeAverage + "\r\n";
             }
         }
         console.log("TESTRESULTS:\n" + testResults);
