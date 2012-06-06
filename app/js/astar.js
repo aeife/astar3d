@@ -49,7 +49,7 @@ AStar.prototype.process = function(node, startNode, endNode, options) {
             }
 
             //var tentative_g = currentNode.g + this.distance(currentNode,neighbor);
-            var tentative_g = currentNode.g + 1;
+            var tentative_g = currentNode.g + this.distance(currentNode,neighbor, options.heuristic, options.heightFactor);
 
             var tentativeIsBetter = false;
 
@@ -77,6 +77,14 @@ AStar.prototype.process = function(node, startNode, endNode, options) {
 };
 
 AStar.prototype.heuristic = function(nodeA, nodeB, heuristic, heightFactor) {
+    if (heuristic == "manhatten") {
+        return Math.abs(nodeA.x - nodeB.x) + Math.abs(nodeA.y - nodeB.y) + (Math.abs(nodeA.z - nodeB.z));
+    } else if (heuristic == "euclidean") {
+        return Math.sqrt(Math.pow((nodeA.x-nodeB.x),2) + Math.pow((nodeA.y-nodeB.y),2) + (Math.pow((nodeA.z-nodeB.z),2)));
+    }
+};
+
+AStar.prototype.distance = function(nodeA, nodeB, heuristic, heightFactor) {
     if (heuristic == "manhatten") {
         return Math.abs(nodeA.x - nodeB.x) + Math.abs(nodeA.y - nodeB.y) + (Math.abs(nodeA.z - nodeB.z)*heightFactor);
     } else if (heuristic == "euclidean") {
