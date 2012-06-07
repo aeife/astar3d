@@ -100,6 +100,9 @@ Current controls (will change probably).
 #### full random test
 * like simple test using full random level
 
+#### test current level
+* tests on current level
+
 #### specific test
 * uses current level
 * specify test ->
