@@ -101,7 +101,7 @@ Current controls (will change probably).
 * like simple test using full random level
 
 #### test current level
-* tests on current level
+* tests on current build level
 
 #### specific test
 * uses current level
