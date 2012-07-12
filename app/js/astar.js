@@ -2,6 +2,14 @@ function AStar () {
 }
 
 AStar.prototype.process = function(node, startNode, endNode, options) {
+    
+    if (startNode.z < endNode.z) {
+        var tmp = endNode;
+        endNode = startNode;
+        startNode = tmp;
+    }
+    
+
     var openList = [];
     openList.push(startNode);
     startNode.open = true;
