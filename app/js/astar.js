@@ -42,6 +42,7 @@ AStar.prototype.process = function(node, startNode, endNode, options) {
 
             return {path: path,traversedNodes: traversedNodes};
         }
+        traversedNodes++;
 
         openList.remove(currentIndex);
         currentNode.open = false;
@@ -65,7 +66,7 @@ AStar.prototype.process = function(node, startNode, endNode, options) {
                 neighbor.open = true;
                 neighbor.h = this.heuristic(neighbor,endNode, options.heuristic, options.heightFactor);
                 openList.push(neighbor);
-                traversedNodes++;
+                
                 tentativeIsBetter = true;
             } else if (tentative_g < neighbor.g) {
                 tentativeIsBetter = true;
