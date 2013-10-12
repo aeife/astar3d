@@ -3,40 +3,40 @@
 ## A three-dimensional a-star algorithm.
 This is an implementation of the a-star algorithm using realistic three-dimensional pathfinding displayed with WebGL.
 
-The A-star algorithm is a pathfinding algorithm computing the shortest path between two nodes using a specific heuristc.Focus of this project is the algorithm itself so some graphics and controls are only implemented as prototypes. 
+The A-star algorithm is a pathfinding algorithm computing the shortest path between two nodes using a specific heuristc. Focus of this project is the algorithm itself so some graphics and controls are only implemented as prototypes. 
 
-For upcoming features,todos and first runtime measurements take a look at the issues on github.
+For upcoming features, todos and first runtime measurements take a look at the issues on github.
 
 ## Demo
 Try it out [here](http://aeife.github.com/astar3d/app/)!
 
 ## Features
 * a-star path navigation considering three dimensions
-* 3d graphics using WebGL and Three.js 
+* 3D graphics using WebGL and Three.js 
 * full customizable three-dimensional level build of cubes
     * easy add and remove cubes
     * impassable wall nodes
-* import and export levels (json)
+* import and export levels (as plain JSON)
 * generate random levels
 	* flat levels with random walls
 	* levels with random walls and random (walkable placed) heights
-* customizable height factor for avoiding heights
-* realistic paths
-    * using all three dimensions to ground navigate
+* customizable height factor for avoiding heights during path finding
+* realistic paths usable in computer games for example
+    * using all three dimensions to compute ground navigatation
     * no flying paths
     * no paths through ground
 * fast algorithm runtime 
-    * e.g. 12.000 traversed nodes in 30ms
+    * 12.000 traversed nodes in 30ms
 * integrated runtime tests
     * random tests
     * specific user defined tests
 
 ## Dependencies
-* jQuery 1.7.1
+* jQuery
 * Three.js
 
 ## HowTo
-Current controls (will change probably).
+Current controls (will change probably)
 
 ### generating levels
 * level width and height definable
@@ -67,14 +67,14 @@ Current controls (will change probably).
 * manhatten
 
 #### height factor
-* defines how much heights are avoided
+* defines if and how heights are avoided
 
 #### show path info
-* show status of nodes at the end of the algorithm
+* show the status of all nodes at the end of the algorithm
 
 #### starting the algorithm
 * start/end nodes need to be defined
-* starting algorithm: process
+* start algorithm: process
 
 #### view node properties
 * middle mouse button on node (after algorithm execution)
@@ -83,7 +83,7 @@ Current controls (will change probably).
 * clears all temporary markers and properties
 
 ### testing
-* tests traversed nodes in relation to needed time (in ms)
+* tests traversed nodes in relation to time needed (in ms)
 * all result are printed to console
 * for each dimension and test run:
     * 50 repetions
@@ -91,7 +91,7 @@ Current controls (will change probably).
 
 #### simple test
 * generates level
-* pathfinding to oposite corners
+* pathfinding between opposite corners
     * for specified dimensions
 
 #### random test
@@ -109,16 +109,16 @@ Current controls (will change probably).
     * define start node
     * define multiple end nodes
 * run specified test ->
-    * test runs from start node to each end node
+    * test runs from start node to each end node specified
 
 ### exporting and importing levels
 
 #### save
-* saves current level as json
+* saves current level as json file
 
 #### load
-* loads level from file (json format) and displays it in the scene
-* overrides current level
+* loads level from file (json format) and displays it in the current scene
+* overrides the current level
 
 ## Main components
 
